@@ -6,7 +6,7 @@ exports.handler = async () => {
 
   try {
     const resp = await fetch(
-      `https://api.yelp.com/v3/businesses/search?categories=donationcenter`,
+      `https://api.yelp.com/v3/businesses/search?categories=donationcenter&location=nyc&term=donation`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
@@ -14,6 +14,7 @@ exports.handler = async () => {
       }
     );
     const donationCenters = await resp.json();
+    console.log('from index.js', donationCenters);
     return {
       statusCode: 200,
       body: JSON.stringify(donationCenters.businesses),
